@@ -1,3 +1,4 @@
+<?php require("framework.php")?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<?php require("framework.php")?>
+
 <div class="container">
     <div class="centered">
     <table>

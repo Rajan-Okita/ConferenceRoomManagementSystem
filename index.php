@@ -1,4 +1,4 @@
-<?php require("framework.php")?>
+<?php require("navbar.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +17,8 @@
     <div class="centered">
     <table>
     <h1 style="text-align: center">Welcome to room booking platform</h1>
-        <tr><a href="#"><button type="button" class="btn btn-info btn-block">Sign Up</button></a><br><br></tr>
-        <tr><a href="#"><button type="button" class="btn btn-info btn-block">Login</button></a></tr>
+        <tr><a href="auth/register.php"><button type="button" class="btn btn-info btn-block">Sign Up</button></a><br><br></tr>
+        <tr><a href="auth/login.php"><button type="button" class="btn btn-info btn-block">Login</button></a></tr>
     </table>
     </div>
 </div>

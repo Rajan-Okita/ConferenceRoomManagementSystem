@@ -18,27 +18,23 @@
         <h1>Sign Up</h1>
         <div>
             <label for="f_name">First Name:</label>
-            <input type="text" name="first_name" id="first_name" placeholder="Enter your first name">
+            <input type="text" name="first_name" id="first_name" placeholder="Enter your first name" required>
         </div>
         <div>
             <label for="l_name">Last Name:</label>
-            <input type="text" name="last_name" id="last_name" placeholder="Enter your last name">
+            <input type="text" name="last_name" id="last_name" placeholder="Enter your last name" required>
         </div>
         <div>
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="Enter your email address">
+            <input type="email" name="email" id="email" placeholder="Enter your email address" required>
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password">
-        </div>
-        <div>
-            <label for="password2">Confirm Password:</label>
-            <input type="password" name="password2" id="password2" placeholder="Confirm password">
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
         </div>
         <div>
             <label for="role">Role:</label>
-            <select name="role">
+            <select name="role" required>
                 <option value="1">User</option>
                 <option value="2">Admin</option>
             </select>
@@ -50,7 +46,8 @@
                 <a href="#" title="term of services">term of services</a>
             </label>
         </div>
-        <button type="submit">Register</button>
+
+        <button type="submit" name="submit">Register</button>
         <footer>Already a member? <a href="login.php">Login here</a></footer>
     </form>
 </main>

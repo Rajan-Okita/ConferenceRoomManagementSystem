@@ -18,7 +18,7 @@
         <h1>Log In</h1>
     <div>
         <label for ="email">Email address</label>
-        <input type ="email" id="email" name="email" required>
+        <input type ="email" id="email" name="email" placeholder="Enter your email address" required>
     </div>
     <div>
         <label for ="password">Password</label>

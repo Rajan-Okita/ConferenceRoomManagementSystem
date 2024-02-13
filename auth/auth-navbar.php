@@ -9,9 +9,6 @@
             <a class="nav-link" href="../index.php">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Book a room</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="#">Help</a>
         </li>
     </ul>

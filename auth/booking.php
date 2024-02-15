@@ -1,5 +1,5 @@
 <?php
-require('navbar.php');?>
+require('auth-navbar.php');?>
 
 <!doctype html>
 <html lang="eng">
@@ -9,12 +9,12 @@ require('navbar.php');?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.phptutorial.net/app/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <main>
-    <form action="#" method="post">
+    <form action="config/process_booking.php" method="post">
         <h1>Book a room</h1>
     <div>
 <label for="room">Select a room:</label>
@@ -30,11 +30,11 @@ require('navbar.php');?>
         <div>
             <label for="book_time">Choose time:</label>
             <select name="book_time" required>
-                <option value="1">08:00-10:00</option>
-                <option value="2">10:00-12:00</option>
-                <option value="3">12:00-14:00</option>
-                <option value="4">14:00-16:00</option>
-                <option value="5">16:00-18:00</option>
+                <option>08:00-10:00</option>
+                <option >10:00-12:00</option>
+                <option >12:00-14:00</option>
+                <option >14:00-16:00</option>
+                <option >16:00-18:00</option>
             </select>
         </div>
 

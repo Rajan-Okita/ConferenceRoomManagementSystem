@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="password_check.js" defer></script>
 </head>
 <body>
 <main>
@@ -30,7 +31,9 @@
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required><br>
+
+            <input type="checkbox" onclick="password_check()">Show password
         </div>
         <div>
             <label for="role">Role:</label>

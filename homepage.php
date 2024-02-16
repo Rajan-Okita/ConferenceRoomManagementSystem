@@ -23,7 +23,7 @@ session_start()?>
             <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Book room</a>
+            <a class="nav-link" href="auth/booking.php">Book room</a>
         </li>
         </li>
         <li class="nav-item">
@@ -44,8 +44,8 @@ session_start()?>
         <table>
             <h1 style="text-align: center">Welcome to room booking platform</h1>
             <div class="d-grid gap-2">
-                <a href="booking.php" button type="button" class="btn btn-primary btn-block">Book a room</button></a>
-                <a href="#" button type="button" class="btn btn-primary btn-block">View booked rooms</button></a>
+                <a href="auth/booking.php" button type="button" class="btn btn-info btn-block">Book a room</button></a>
+                <a href="#" button type="button" class="btn btn-info btn-block">View booked rooms</button></a>
             </div>
         </table>
     </div>

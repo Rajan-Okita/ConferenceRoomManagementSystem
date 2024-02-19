@@ -2,23 +2,18 @@
 require('auth-navbar.php');
 require('config/connection.php');
 
-
 $booking_time_query = "show columns from booking_tbl where field = 'book_time'";
 $booking_time_query_result = mysqli_query($con,$booking_time_query);
 
 $available_times = array();
 if ($booking_time_query_result->num_rows == 1) {
-    $row = $booking_time_query_result->fetch_assoc();
+    $booking_time_row = $booking_time_query_result->fetch_assoc();
     
-    preg_match_all("/'(.*?)'/", $row["Type"], $matches);
+    preg_match_all("/'(.*?)'/", $booking_time_row["Type"], $matches);
     $available_times = $matches[1];
 } else {
     echo "Error: Unable to fetch book_time column information.";
 }
-while ($row = $booking_time_query_result->fetch_assoc()) {
-    $available_times[] = $row['book_time'];
-}
-
 ?>
 <!doctype html>
 <html lang="eng">
@@ -35,17 +30,29 @@ while ($row = $booking_time_query_result->fetch_assoc()) {
         function populateTimes() {
             let selectedDate = document.getElementById("selected_date").value;
 
-            let availableTimes = <?php echo json_encode($available_times); ?>;
+            let room = document.getElementById("selected_room").value;
+            
 
-            let selectTime = document.getElementById("select_time");
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let bookedTimes = JSON.parse(xhr.responseText);
+                    let selectTime = document.getElementById("select_time");
+                    selectTime.innerHTML = "";
 
-            selectTime.innerHTML = "";
-
-            for (let i = 0; i < availableTimes.length; i++) {
-                let option = document.createElement("option");
-                option.text = availableTimes[i];
-                selectTime.add(option);
-            }
+                    <?php foreach($available_times as $time): ?>
+                    if (!bookedTimes.includes("<?php echo $time; ?>")) {
+                        let option = document.createElement("option");
+                        option.text = "<?php echo $time; ?>";
+                        selectTime.add(option);
+                    }
+                    <?php endforeach; ?>
+                }
+            };
+                    
+            
+            xhr.open("GET", "get_booked_times.php?selected_date=" + selectedDate + "&room=" + room, true);
+            xhr.send();
         }
     </script>
     
@@ -56,7 +63,7 @@ while ($row = $booking_time_query_result->fetch_assoc()) {
         <h1>Book a room</h1>
     <div>
         <?php
-        $room_name_query="select room_name from rooms_tbl";
+        $room_name_query="select room_name, rooms_id from rooms_tbl";
         $room_name_query_result=mysqli_query($con,$room_name_query);
         if(!$room_name_query_result){
             echo 'Error: '.msqli_error($con);
@@ -64,10 +71,10 @@ while ($row = $booking_time_query_result->fetch_assoc()) {
         ?>
 
 <label for="room">Select a room:</label>
-<select name="room" required >
+<select name="room" id="selected_room" onchange="populateTimes()" required >
     <?php
     while($room_name_row = mysqli_fetch_assoc($room_name_query_result)){
-        echo "<option>" . $room_name_row['room_name'] . "</option>";
+        echo '<option value="' . $room_name_row['rooms_id'] . '">' . $room_name_row['room_name'] . '</option>';
     }
     ?>
 </select>

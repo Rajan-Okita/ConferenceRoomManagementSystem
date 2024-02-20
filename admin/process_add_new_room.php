@@ -1,5 +1,5 @@
 <?php
-require ('connection.php');
+require('../auth/config/connection.php');
 if ($_SERVER['REQUEST_METHOD']=='POST') {
     $rooms = $_POST['roomAdd'];
 
@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     $queryCon=mysqli_query($con,$query);
     if ($queryCon){
-        header("location:../../adminpage.php");
+        header("location:adminpage.php");
     }else{
         echo 'Error: '.msqli_error($con);
     }

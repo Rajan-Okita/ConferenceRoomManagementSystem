@@ -37,7 +37,7 @@ if ($booking_time_query_result->num_rows == 1) {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     let bookedTimes = JSON.parse(xhr.responseText);
-                    let selectTime = document.getElementById("select_time");
+                    let selectTime = document.getElementById("selected_time");
                     selectTime.innerHTML = "";
 
                     <?php foreach($available_times as $time): ?>
@@ -84,12 +84,12 @@ if ($booking_time_query_result->num_rows == 1) {
             <input type="date" name="selected_date" id="selected_date" onchange="populateTimes()" required>
         </div>
         <div>
-            <label for="select_time">Choose time:</label>
-            <select name="select_time" id="select_time" required>
+            <label for="selected_time">Choose time:</label>
+            <select name="selected_time" id="selected_time" required>
                 
             </select>
         </div>
-        <button type="submit" name="book">Book</button>
+        <button type="submit" name="booked">Book</button>
     </form>
 
 </main>

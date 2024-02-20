@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (password_verify($password, $row['password'])) {
                     $_SESSION['sessionuser'] = $row['first_name'];
                     $_SESSION['sessionname'] = $row['last_name'];
+                    $_SESSION['user_id'] = $row['users_id'];
                     if ($row['role'] == 'user') {
                         $_SESSION['sessionid'] = $row['role'];
                         header("location:../../homepage.php");

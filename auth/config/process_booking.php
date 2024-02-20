@@ -30,4 +30,5 @@ if (isset($_POST['booked'])) {
             }
         }
 }
+
 ?>

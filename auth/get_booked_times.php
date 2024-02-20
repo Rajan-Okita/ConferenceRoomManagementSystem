@@ -15,10 +15,9 @@ if(isset($_GET['selected_date']) && isset($_GET['room'])) {
         $booked_times[] = $row['book_time'];
     }
 
-    // Return booked times as JSON
     echo json_encode($booked_times);
 } else {
-    // Return an error message if parameters are not set
+
     echo "Error: Parameters 'selected_date' and 'room' are required.";
 }
 ?>

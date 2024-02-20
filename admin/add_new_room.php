@@ -1,4 +1,4 @@
-<?php require("auth-navbar.php");?>
+<?php require("../auth/auth-navbar.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +14,7 @@
 </head>
 <body>
 <main>
-    <form action="config/process_roomAdd.php" method="post">
+    <form action="process_add_new_room.php" method="post">
         <h1>Add room</h1>
         <div>
             <label for="roomAdd">Room:</label>

@@ -80,6 +80,5 @@ if (isset($_GET['delete_users_id'])){
     }else{
         echo "Failed to delete user";
     }
-}
-
-
+};
+?>

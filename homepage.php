@@ -45,7 +45,9 @@ session_start()?>
             <h1 style="text-align: center">Welcome to room booking platform</h1>
             <div class="d-grid gap-2">
                 <a href="auth/booking.php" button type="button" class="btn btn-info btn-block">Book a room</button></a>
-                <a href="#" button type="button" class="btn btn-info btn-block">View booked rooms</button></a>
+                <a href="auth/user_view_all_bookings.php" button type="button" class="btn btn-info btn-block">View all booked rooms</button></a>
+                <a href="auth/user_view_own_booking.php" button type="button" class="btn btn-info btn-block">View your booked rooms</button></a>
+
             </div>
         </table>
     </div>

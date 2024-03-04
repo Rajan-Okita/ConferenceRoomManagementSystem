@@ -14,6 +14,7 @@
     <script src="password_check.js" defer></script>
 </head>
 <body>
+<?php session_start() ?>
 <main>
     <form action="config/process_register.php" method="post">
         <h1>Sign Up</h1>

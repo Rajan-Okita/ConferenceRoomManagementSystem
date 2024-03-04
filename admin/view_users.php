@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php require('admin-navbar.php');?>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>View Users </title>
@@ -12,21 +14,6 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-
-    <a class="navbar-brand" href="#">
-        <img src="../logo.jpeg" alt="logo" style="width:60px;">
-    </a>
-
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="admin_page.php">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Help</a>
-        </li>
-    </ul>
-</nav>
 
 <div class="container mt-5">
 
@@ -69,6 +56,8 @@ if(!$view_users_result){
             ?>
         </table>
     </div>
+    </body>
+
     <?php
 if (isset($_GET['delete_users_id'])){
     $delete_users_id= $_GET['delete_users_id'];

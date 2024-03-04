@@ -1,3 +1,19 @@
+<?php require('admin-navbar.php');?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update users </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.phptutorial.net/app/css/style.css">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<div class="container mt-5">
 <?php
 require_once("../auth/config/connection.php");
 
@@ -48,8 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_users'])) {
 
 mysqli_close($con);
 ?>
-
+<main>
 <form method="post" action="">
+    <h1>Update User details </h1>
     <input type="hidden" name="users_id" value="<?php echo htmlspecialchars($users_id); ?>">
 
     <label for="first_name">First Name:</label>
@@ -62,6 +79,8 @@ mysqli_close($con);
     <label for="role">Role:</label>
     <input type="role" name="role" value="<?php echo $user['role']; ?>"><br><br>
 
-    <input type="submit" name="update_users" value="Update">
+    <button type="submit" name="update_users" value="Update">Update</button>
+</div>
 </form>
-
+</main>
+</body>

@@ -1,3 +1,5 @@
+<?php require('admin-navbar.php');?>
+
 <?php
 session_start();
 require("../auth/config/connection.php");

@@ -6,14 +6,6 @@ $booking_time_query = "show columns from booking_tbl where field = 'book_time'";
 $booking_time_query_result = mysqli_query($con,$booking_time_query);
 
 $available_times = array();
-if ($booking_time_query_result->num_rows == 1) {
-    $booking_time_row = $booking_time_query_result->fetch_assoc();
-    
-    preg_match_all("/'(.*?)'/", $booking_time_row["Type"], $matches);
-    $available_times = $matches[1];
-} else {
-    echo "Error: Unable to fetch book_time column information.";
-}
 ?>
 <!doctype html>
 <html lang="eng">
@@ -27,6 +19,72 @@ if ($booking_time_query_result->num_rows == 1) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        let endTimes = [];
+        function generateEndTimesFromStart(selectedStartTime,endTimes) {
+            const startTime = new Date(`1970-01-01T${selectedStartTime}:00`);
+
+            // Loop until 6 PM (18:00) generating end times with 30-minute intervals
+            while (startTime.getHours() < 18) {
+                const endTime = new Date(startTime.getTime() + (30 * 60 * 1000)); // Add 30 minutes
+                let endTimeString = `${endTime.getHours() < 10 ? '0' : ''}${endTime.getHours()}:${endTime.getMinutes() < 10 ? '0' : ''}${endTime.getMinutes()}`;
+                endTimes.push(endTimeString);
+                startTime.setTime(startTime.getTime() + (30 * 60 * 1000)); // Move to the next 30-minute interval
+            }
+
+            return endTimes;
+        }
+
+        function generateEndTimes(startTimes) {
+            const endTimes = [];
+
+            // Loop through each start time
+            for (let i = 0; i < startTimes.length; i++) {
+                const startTime = new Date(`1970-01-01T${startTimes[i]}:00`);
+                const endTime = new Date(startTime.getTime() + (30 * 60 * 1000)); // Add 30 minutes
+                let endTimeString = `${endTime.getHours() < 10 ? '0' : ''}${endTime.getHours()}:${endTime.getMinutes() < 10 ? '0' : ''}${endTime.getMinutes()}`;
+                endTimes.push(endTimeString);
+            }
+
+            return endTimes;
+        }
+        function generateStartIntervals(bookedIntervals) {
+            const intervals = [];
+            const startTime = new Date(0);
+            startTime.setHours(8, 0, 0); // Set start time to 8 am
+
+            // Loop until 6 PM (18:00)
+            while (startTime.getHours() < 18) {
+                let timeString = `${startTime.getHours() < 10 ? '0' : ''}${startTime.getHours()}:${startTime.getMinutes() < 10 ? '0' : ''}${startTime.getMinutes()}`;
+                if (!bookedIntervals.includes(timeString)) {
+                    intervals.push(timeString);
+                }
+                startTime.setTime(startTime.getTime() + (30 * 60 * 1000)); // Add 30 minutes
+            }
+
+            return intervals;
+        }
+
+        function generateBookedIntervals(startTime, endTime) {
+            const bookedIntervals = [];
+            const [startHour, startMinute, startSecond] = startTime.split(':').map(Number);
+            const [endHour, endMinute, endSecond] = endTime.split(':').map(Number);
+
+            const start = new Date(0);
+            start.setHours(startHour, startMinute, startSecond); // Set start time
+
+            const end = new Date(0);
+            end.setHours(endHour, endMinute, endSecond); // Set end time
+
+            // Loop from start time to end time in 30-minute intervals
+            while (start < end) {
+                let timeString = `${start.getHours() < 10 ? '0' : ''}${start.getHours()}:${start.getMinutes() < 10 ? '0' : ''}${start.getMinutes()}`;
+                bookedIntervals.push(timeString);
+                start.setTime(start.getTime() + (30 * 60 * 1000)); // Add 30 minutes
+            }
+
+            return bookedIntervals;
+        }
+
         function populateTimes() {
             let selectedDate = document.getElementById("selected_date").value;
 
@@ -35,24 +93,55 @@ if ($booking_time_query_result->num_rows == 1) {
 
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
+                let startTimes = [];
+                let endTimes = [];
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     let bookedTimes = JSON.parse(xhr.responseText);
-                    let selectTime = document.getElementById("selected_time");
-                    selectTime.innerHTML = "";
+                    if (bookedTimes) {
+                        console.log(bookedTimes);
+                        let bookedIntervals = [];
+                        bookedTimes.forEach(times => {
+                            bookedIntervals = bookedIntervals.concat(generateBookedIntervals(times.start_time, times.end_time))
+                        });
+                        startTimes = generateStartIntervals(bookedIntervals);
+                        endTimes = generateEndTimes(startTimes);
 
-                    <?php foreach($available_times as $time): ?>
-                    if (!bookedTimes.includes("<?php echo $time; ?>")) {
+                    let startTimesHTML = document.getElementById("start_time");
+                    startTimesHTML.innerHTML = "";
+
+                    let endTimesHTML = document.getElementById("end_time");
+                    endTimesHTML.innerHTML = "";
+
+                    for (let i = 0; i< startTimes.length; i++) {
                         let option = document.createElement("option");
-                        option.text = "<?php echo $time; ?>";
-                        selectTime.add(option);
+                        option.text = startTimes[i];
+                        startTimesHTML.add(option);
                     }
-                    <?php endforeach; ?>
+
+                        for (let i = 0; i< endTimes.length; i++) {
+                            let option = document.createElement("option");
+                            option.text = endTimes[i];
+                            endTimesHTML.add(option);
+                        }
+                }
                 }
             };
                     
             
             xhr.open("GET", "get_booked_times.php?selected_date=" + selectedDate + "&room=" + room, true);
             xhr.send();
+        }
+
+        function populateEndTimes(selectedTime){
+            let tempEndTimes = Array.from(endTimes);
+            let ends = generateEndTimesFromStart(selectedTime,tempEndTimes);
+            let endTimesHTML = document.getElementById("end_time");
+            endTimesHTML.innerHTML = "";
+            for (let i = 0; i< ends.length; i++) {
+                let option = document.createElement("option");
+                option.text = ends[i];
+                endTimesHTML.add(option);
+            }
         }
     </script>
     
@@ -84,9 +173,13 @@ if ($booking_time_query_result->num_rows == 1) {
             <input type="date" name="selected_date" id="selected_date" onchange="populateTimes()" required>
         </div>
         <div>
-            <label for="selected_time">Choose time:</label>
-            <select name="selected_time" id="selected_time" required>
-                
+            <label for="start_time">Choose start time:</label>
+            <select name="start_time" id="start_time" onchange="populateEndTimes(this.value)" required>
+            </select>
+        </div>
+        <div>
+            <label for="end_time">Choose end time:</label>
+            <select name="end_time" id="end_time"  required>
             </select>
         </div>
         <button type="submit" name="booked">Book</button>

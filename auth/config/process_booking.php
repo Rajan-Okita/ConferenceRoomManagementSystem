@@ -13,14 +13,16 @@ if (isset($_POST['booked'])) {
 
     $room = $_POST['room'];
     $book_day = $_POST['selected_date'];
-    $book_time = $_POST['selected_time'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
 
     $day_of_week = date('w', strtotime($book_day));
     if ($day_of_week == 0) {
         echo "Sorry, bookings are not allowed on Sundays.";
     } else {
 
-            $booking_query = "INSERT INTO booking_tbl (day_booked, book_time,users_id,room_id) VALUES ('$book_day', '$book_time','$user_id','$room')";
+            $booking_query = "INSERT INTO booking_tbl (start_time,end_time,day_booked,users_id,room_id) 
+VALUES ('$start_time', '$end_time','$book_day','$user_id','$room')";
             $booking_query_con = mysqli_query($con, $booking_query);
 
             if ($booking_query_con) {

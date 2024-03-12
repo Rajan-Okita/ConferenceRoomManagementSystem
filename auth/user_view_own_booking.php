@@ -45,7 +45,7 @@
                           FROM booking_tbl 
                           INNER JOIN rooms_tbl ON booking_tbl.room_id = rooms_tbl.rooms_id
                           WHERE booking_tbl.users_id = '$user_id'
-                          ORDER BY booking_tbl.day_booked DESC";
+                          ORDER BY booking_tbl.day_booked,start_time DESC";
     $view_booking_result = mysqli_query($con, $view_booking_query);
 
     if (mysqli_num_rows($view_booking_result) > 0) {
@@ -55,7 +55,8 @@
                     <thead>
                         <tr>
                             <th>Day Booked</th>
-                            <th>Time</th>
+                            <th>Start Time</th>
+                             <th>End Time</th>
                             <th>Room</th>
                             <th>Action</th>
                         </tr>
@@ -64,7 +65,8 @@
         while ($view_booking_row = mysqli_fetch_assoc($view_booking_result)) {
             echo "<tr>";
             echo "<td>" . $view_booking_row['day_booked'] . "</td>";
-            echo "<td>" . $view_booking_row['book_time'] . "</td>";
+            echo "<td>" . $view_booking_row['start_time'] . "</td>";
+            echo "<td>" . $view_booking_row['end_time'] . "</td>";
             echo "<td>" . $view_booking_row['room_name'] . "</td>";
             echo "<td>
                 <a href='update_booking.php?bookings_id=" . $view_booking_row['booking_id'] . "' class='btn btn-primary btn-sm'>Update</a>

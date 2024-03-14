@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 if (isset($_GET['delete_bookings_id'])) {
-    $booking_id = $_GET['delete_gibookings_id'];
+    $booking_id = $_GET['delete_bookings_id'];
 
     $delete_query = "DELETE FROM booking_tbl WHERE booking_id = '$booking_id'";
     $delete_result = mysqli_query($con, $delete_query);

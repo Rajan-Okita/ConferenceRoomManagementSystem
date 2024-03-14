@@ -34,7 +34,7 @@
     session_start();
     require("../auth/config/connection.php");
 
-    $view_booking_query = "SELECT booking_tbl.booking_id, CONCAT(users_tbl.first_name, ' ', users_tbl.last_name) AS full_name, rooms_tbl.room_name, booking_tbl.day_booked, booking_tbl.book_time 
+    $view_booking_query = "SELECT booking_tbl.booking_id, CONCAT(users_tbl.first_name, ' ', users_tbl.last_name) AS full_name, rooms_tbl.room_name, booking_tbl.day_booked, booking_tbl.start_time,booking_tbl.end_time 
                       FROM booking_tbl 
                       INNER JOIN rooms_tbl ON booking_tbl.room_id = rooms_tbl.rooms_id
                       INNER JOIN users_tbl ON booking_tbl.users_id = users_tbl.users_id
@@ -49,7 +49,8 @@
                         <th>User</th>
                         <th>Room</th>
                         <th>Day</th>
-                        <th>Time</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -58,7 +59,8 @@
             echo "<td>" . $view_booking_row['full_name'] . "</td>";
             echo "<td>" . $view_booking_row['room_name'] . "</td>";
             echo "<td>" . $view_booking_row['day_booked'] . "</td>";
-            echo "<td>" . $view_booking_row['book_time'] . "</td>";
+            echo "<td>" . $view_booking_row['start_time'] . "</td>";
+            echo "<td>" . $view_booking_row['end_time'] . "</td>";
             echo "</tr>";
         }
         echo "</tbody></table></div>";

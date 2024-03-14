@@ -45,7 +45,7 @@
                           FROM booking_tbl 
                           INNER JOIN rooms_tbl ON booking_tbl.room_id = rooms_tbl.rooms_id
                           WHERE booking_tbl.users_id = '$user_id'
-                          ORDER BY booking_tbl.day_booked,start_time DESC";
+                          ORDER BY booking_tbl.day_booked DESC;";
     $view_booking_result = mysqli_query($con, $view_booking_query);
 
     if (mysqli_num_rows($view_booking_result) > 0) {

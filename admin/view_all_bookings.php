@@ -48,8 +48,8 @@
             echo "<td>" . $view_booking_row['start_time'] . "</td>";
             echo "<td>" . $view_booking_row['end_time'] . "</td>";
             echo "<td>
-            <a href='update_booking.php?bookings_id=" . $view_booking_row['booking_id'] . "' class='btn btn-primary btn-sm'>Update</a>
-            <a href='delete_booking.php?delete_bookings_id=" . $view_booking_row['booking_id'] . "' class='btn btn-danger btn-sm'>Delete</a>
+            <a href='update_all_bookings.php?bookings_id=" . $view_booking_row['booking_id'] . "' class='btn btn-primary btn-sm'>Update</a>
+            <a href='delete_all_bookings.php?delete_bookings_id=" . $view_booking_row['booking_id'] . "' class='btn btn-danger btn-sm'>Delete</a>
           </td>";
             echo "</tr>";
         }

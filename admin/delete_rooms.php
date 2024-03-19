@@ -12,15 +12,11 @@ if (isset($_GET['rooms_id'])) {
 
     if ($delete_result) {
 
-        header("Location: view_rooms.php");
+        header("Location:admin_page.php");
         exit();
     } else {
 
         echo "Error deleting room. Please try again.";
     }
-} else {
-
-    header("Location:admin_page.php");
-    exit();
 }
 ?>

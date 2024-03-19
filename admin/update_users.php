@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_users'])) {
         }
         mysqli_stmt_close($stmt);
 
-        header("location:view_users.php");
+        header("location:admin_page.php");
         exit();
     }
 }

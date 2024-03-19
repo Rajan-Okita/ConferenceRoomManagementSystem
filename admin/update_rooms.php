@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $update_query = "UPDATE rooms_tbl SET room_name = '$new_room_name' WHERE rooms_id = $rooms_id";
     if (mysqli_query($con, $update_query)) {
 
-         header("Location: view_rooms.php");
+         header("Location:admin_page.php");
          exit();
     } else {
         echo "Error updating room details: " . mysqli_error($con);
